@@ -3,7 +3,7 @@ from traceback import print_stack
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import *
-import Utilities_Ampro.custom_logger as cl
+import utilities_Ampro.custom_logger as cl
 import logging
 import time
 import os,traceback,sys
@@ -69,19 +69,19 @@ class SeleniumDriver():
             self.log.info("Element found with locator: " + locator +
                           " and  locatorType: " + locatorType)
         except:
-            self.log.error("Element not found with locator: " + locator +
+            self.log.error("Element not found in getElement with locator: " + locator +
                           " and  locatorType: " + locatorType)
         return element
 
-    def getElements(self,locator,locatorType):
-        elements=None
+    def getElements(self, locator, locatorType):
+        elements = None
         try:
-            locatorType=locatorType.lower()
-            byType=self.getbyType(locatorType)
-            elements=self.driver.find_elements(byType,locator)
-            self.log.info('element Found with locator '+ locator+ ' and locatorType '+locatorType)
+            locatorType = locatorType.lower()
+            byType = self.getByType(locatorType)
+            elements = self.driver.find_elements(byType, locator)
+            self.log.info('element Found with locator '+ locator + ' and locatorType '+locatorType)
         except:
-            self.log.error('Element not found in getElement '+ locator+ ' and locatorType '+locatorType)  
+            self.log.error('Element not found in getElements '+ locator + ' and locatorType '+locatorType)  
         return elements    
 
     def elementClick(self,locator="", locatorType="id", element=None):
@@ -166,7 +166,7 @@ class SeleniumDriver():
             return False
 
     def waitForElement(self, locator, locatorType="id",
-                               timeout=10, pollFrequency=0.5):
+                               timeout=15, pollFrequency=0.5):
         element = None
         try:
             byType = self.getByType(locatorType)
@@ -184,6 +184,26 @@ class SeleniumDriver():
             self.log.info("Element not appeared on the web page")
             print_stack()
         return element
+
+    def waitForVisibilityOfElement(self, locator, locatorType="id",
+                               timeout=25, pollFrequency=1):
+        element = None
+        try:
+            byType = self.getByType(locatorType)
+            self.log.info("Waiting for maximum :: " + str(timeout) +
+                  " :: seconds for element to be clickable")
+            wait = WebDriverWait(self.driver, timeout=timeout,
+                                 poll_frequency=pollFrequency,
+                                 ignored_exceptions=[NoSuchElementException,
+                                                     ElementNotVisibleException,
+                                                     ElementNotSelectableException,
+                                                     StaleElementReferenceException])
+            element = wait.until(EC.visibility_of_element_located((byType, locator)))
+            self.log.info("Element appeared on the web page")
+        except:
+            self.log.info("Element not appeared on the web page")
+            print_stack()
+        return element    
 
     def getText(self,locator="",locatorType="id",element="", info=""):
         try:
@@ -204,10 +224,10 @@ class SeleniumDriver():
             text = None
         return text  
 
-    def webScroll(self,direction="up"):  
+    def webScroll(self, direction="up"):  
         if direction=="up":
             self.driver.execute_script("window.scrollBy(0,-1000);")
             time.sleep(3)
         elif direction=="down":
-            self.driver.execute_script("window.scrollTo(0,250);")
+            self.driver.execute_script("window.scrollTo(0,500);")
             time.sleep(3)            

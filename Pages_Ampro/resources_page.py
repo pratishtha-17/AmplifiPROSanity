@@ -1,11 +1,11 @@
-from Base_Ampro.selenium_driver import SeleniumDriver
+from base_Ampro.basepage import BasePage
 from selenium.webdriver import ActionChains
-import Utilities_Ampro.custom_logger as cl
+import utilities_Ampro.custom_logger as cl
 import logging, time, traceback
 from selenium.webdriver.common.action_chains import ActionChains
 from random import randint
 
-class ResourcesPage(SeleniumDriver):
+class ResourcesPage(BasePage):
 
     log = cl.customLogger(logging.DEBUG)
     
@@ -14,15 +14,16 @@ class ResourcesPage(SeleniumDriver):
         self.driver=driver
 
     #Locators
-    _resources="//div[@id='navbarNavDropdown']/div/ul[2]/li[5]/a"
-    _blogs="(//a[contains(text(),'Blogs')])[1]"
+    _resources="//ul[@class='navbar-nav mt-3']//li[5]"
+    #_blogs="(//a[contains(text(),'Blogs')])[1]"
+    _blogs="//ul[@class='navbar-nav mt-3']//li[5]//a[@sectionofpage='Resources - Blogs']"
     _breadcrumb="//div[contains(@class,'pageheading')]//ol//li[3]"
     _attribute="//input[@id='timeInSeconds']"
-    _case_studies="(//a[contains(text(),'Case studies')])[1]"
-    _podcasts_n_videos="(//a[contains(text(),'Podcasts and videos')])[1]"
-    _spend_matters_insights="(//a[contains(text(),'Spend matters insights')])[1]"
-    _thought_leadership="(//a[contains(text(),'Thought leadership')])[1]"
-    _CASME_resource_centre="(//a[contains(text(),'CASME resource centre')])[1]"
+    _case_studies="//ul[@class='navbar-nav mt-3']//li[5]//a[@sectionofpage='Resources - Case studies']"
+    _podcasts_n_videos="//ul[@class='navbar-nav mt-3']//li[5]//a[@sectionofpage='Resources - Podcasts and videos']"
+    _spend_matters_insights="//ul[@class='navbar-nav mt-3']//li[5]//a[@sectionofpage='Resources - Spend Matters insights']"
+    _thought_leadership="//ul[@class='navbar-nav mt-3']//li[5]//a[@sectionofpage='Resources - Thought leadership']"
+    _CASME_resource_centre="//ul[@class='navbar-nav mt-3']//li[5]//a[@sectionofpage='Resources - CASME resource centre']"
     _CASME_logo="//a[contains(@class,'logo pull-left site-logo')]/img"
     
     def navigateToResources(self):
@@ -30,10 +31,10 @@ class ResourcesPage(SeleniumDriver):
         self.log.info("Clicked on Resources top menu")
 
     def navigateToBlogs(self):
-        action=ActionChains(self.driver)
+        actions=ActionChains(self.driver)
         first_link=self.getElement(self._blogs,locatorType="xpath")
-        action.move_to_element(first_link).click().perform()
-        self.log.info("Clicked on Blogs under All Intelligence top menu")
+        actions.move_to_element(first_link).click().perform()
+        self.log.info("Clicked on Blogs under Resources top menu")
         time.sleep(3)
 
     def verifyNavigationToBlogs(self):
@@ -49,10 +50,10 @@ class ResourcesPage(SeleniumDriver):
             return False
 
     def navigateToCaseStudies(self):
-        action=ActionChains(self.driver)
+        actions=ActionChains(self.driver)
         second_link=self.getElement(self._case_studies,locatorType="xpath")
-        action.move_to_element(second_link).click().perform()
-        self.log.info("Clicked on Case studies under All Intelligence top menu")
+        actions.move_to_element(second_link).click().perform()
+        self.log.info("Clicked on Case studies under Resources top menu")
         time.sleep(3)
 
     def verifyNavigationToCaseStudies(self):
@@ -69,10 +70,10 @@ class ResourcesPage(SeleniumDriver):
             return False  
 
     def navigateToPodcastsnVideos(self):
-        action=ActionChains(self.driver)
+        actions=ActionChains(self.driver)
         third_link=self.getElement(self._podcasts_n_videos,locatorType="xpath")
-        action.move_to_element(third_link).click().perform()
-        self.log.info("Clicked on Podcasts and videos under All Intelligence top menu")
+        actions.move_to_element(third_link).click().perform()
+        self.log.info("Clicked on Podcasts and videos under Resources top menu")
         time.sleep(3)
 
     def verifyNavigationToPodcastsnVideos(self):
@@ -89,10 +90,10 @@ class ResourcesPage(SeleniumDriver):
             return False   
 
     def navigateToSpendMattersInsights(self):
-        action=ActionChains(self.driver)
+        actions=ActionChains(self.driver)
         fourth_link=self.getElement(self._spend_matters_insights,locatorType="xpath")
-        action.move_to_element(fourth_link).click().perform()
-        self.log.info("Clicked on Spend Matters Insights under All Intelligence top menu")
+        actions.move_to_element(fourth_link).click().perform()
+        self.log.info("Clicked on Spend Matters Insights under Resources top menu")
         time.sleep(3)
 
     def verifyNavigationToSpendMattersInsights(self):
@@ -109,10 +110,10 @@ class ResourcesPage(SeleniumDriver):
             return False          
 
     def navigateToThoughtLeadership(self):
-        action=ActionChains(self.driver)
+        actions=ActionChains(self.driver)
         fifth_link=self.getElement(self._thought_leadership,locatorType="xpath")
-        action.move_to_element(fifth_link).click().perform()
-        self.log.info("Clicked on Thought leadership under All Intelligence top menu")
+        actions.move_to_element(fifth_link).click().perform()
+        self.log.info("Clicked on Thought leadership under Resources top menu")
         time.sleep(3)
 
     def verifyNavigationToThoughtLeadership(self):
@@ -129,12 +130,12 @@ class ResourcesPage(SeleniumDriver):
             return False 
 
     def navigateToCASMEResourceCentre(self):
-        action=ActionChains(self.driver)
+        actions=ActionChains(self.driver)
         sixth_link = self.getElement(self._CASME_resource_centre,locatorType="xpath")
         parentHandle = self.driver.current_window_handle
         self.log.info("Parent Handle identified [%s]", parentHandle)
-        action.move_to_element(sixth_link).click().perform()
-        self.log.info("Clicked on CASME resource centre under All Intelligence top menu")
+        actions.move_to_element(sixth_link).click().perform()
+        self.log.info("Clicked on CASME under Resources top menu")
         time.sleep(3)
         #Finding all handles
         handles=self.driver.window_handles
@@ -146,9 +147,7 @@ class ResourcesPage(SeleniumDriver):
                 
     def verifyNavigationToCASMEResourceCentre(self):
         result=self.isElementPresent(self._CASME_logo,locatorType="xpath")
-        if result==True:
-            return result 
-        else:
-            return False                         
+        return result 
+                               
 
     

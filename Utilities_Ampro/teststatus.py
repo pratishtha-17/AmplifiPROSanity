@@ -1,6 +1,6 @@
-import Utilities_Ampro.custom_logger as cl
+import utilities_Ampro.custom_logger as cl
 import logging
-from Base_Ampro.selenium_driver import SeleniumDriver
+from base_Ampro.selenium_driver import SeleniumDriver
 from traceback import print_stack
 import sys,traceback
 
@@ -18,6 +18,7 @@ class StatusCheck(SeleniumDriver):
     def setResult(self, result, resultMessage):
         try:
             if result is not None:
+                #import pdb;pdb.set_trace()
                 if result == True:
                     self.resultList.append("PASS")
                     self.log.info("### VERIFICATION SUCCESSFUL :: + " + resultMessage)

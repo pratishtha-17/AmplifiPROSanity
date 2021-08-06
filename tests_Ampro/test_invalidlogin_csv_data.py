@@ -1,10 +1,10 @@
 from selenium import webdriver
-from Pages_Ampro.login_page import LoginPage
-from Utilities_Ampro.teststatus import StatusCheck
+from pages_Ampro.login_page import LoginPage
+from utilities_Ampro.teststatus import StatusCheck
 import unittest
 import pytest
 from ddt import ddt,data,unpack
-from Utilities_Ampro.read_data import getCSVData
+from utilities_Ampro.read_data import getCSVData
 
 @pytest.mark.usefixtures("oneTimeSetUp", "setUp")
 @ddt

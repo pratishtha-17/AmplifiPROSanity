@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
-from Pages_Ampro.login_page import LoginPage
-from Base_Ampro.webdriverfactory import WebDriverFactory
+from pages_Ampro.login_page import LoginPage
+from base_Ampro.webdriverfactory import WebDriverFactory
 import time
 
 @pytest.fixture(scope="module")
@@ -13,10 +13,11 @@ def setUp():
 @pytest.fixture(scope="class")
 def oneTimeSetUp(request, browser):
     print("Running one time setUp")
-    wdf=WebDriverFactory(browser)
-    driver=wdf.getWebDriverInstance()
+    wdf = WebDriverFactory(browser)
+    driver = wdf.getWebDriverInstance()
     lp=LoginPage(driver)
-    lp.login("pratishtha.bhadula@thesmartcube.com","learn@2020")
+    # lp.login("pratishtha.bhadula@thesmartcube.com","Login#123") #test credentials
+    lp.login("pratishtha.bhadula@thesmartcube.com","Technology#1706")
     time.sleep(2)
 
     if request.cls is not None:

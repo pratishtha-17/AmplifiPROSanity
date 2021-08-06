@@ -1,14 +1,18 @@
-from Base_Ampro.selenium_driver import SeleniumDriver
-import Utilities_Ampro.custom_logger as cl
+from base_Ampro.basepage import BasePage
+import utilities_Ampro.custom_logger as cl
 import logging,time
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver import ActionChains
+from pages_Ampro.navigation_page import NavigationPage
 
-class LoginPage(SeleniumDriver):
+class LoginPage(BasePage):
 
     log = cl.customLogger(logging.DEBUG)
     
-    def __init__(self,driver):
+    def __init__(self, driver):
         super().__init__(driver)
-        self.driver=driver
+        self.driver = driver
+        self.nav = NavigationPage(driver)
         
     #Locators
     _email_field="email"    
@@ -17,7 +21,7 @@ class LoginPage(SeleniumDriver):
     _Ampro_logo="(//nav[@id='tsc_nav_1']/a/img)[1]"
     _incorrect_credentials_msg="spanerrormsg"
     _logout="//span[contains(@class,'glyphicon-log-out')]"
-
+    
     def enterEmail(self, email):
         self.sendKeys(email,self._email_field)
 
@@ -39,7 +43,6 @@ class LoginPage(SeleniumDriver):
 
     def verifyLoginFailed(self):
         result=self.isElementPresent(self._incorrect_credentials_msg,locatorType="xpath") 
-        return result    
+        return result 
 
-          
-        
+    

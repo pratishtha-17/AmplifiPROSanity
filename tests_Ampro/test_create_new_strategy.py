@@ -1,9 +1,9 @@
 from selenium import webdriver
-from Pages_Ampro.create_new_strategy_homepage import CreateNewStrategyPage
-from Utilities_Ampro.teststatus import StatusCheck
+from pages_Ampro.create_new_strategy_homepage import CreateNewStrategyPage
+from utilities_Ampro.teststatus import StatusCheck
 import unittest, pytest
 from ddt import ddt, data, unpack
-from Utilities_Ampro.read_data import getCSVData
+from utilities_Ampro.read_data import getCSVData
 
 @pytest.mark.usefixtures("oneTimeSetUp", "setUp")
 class NewStrategyCSVDataTests(unittest.TestCase):
@@ -12,7 +12,7 @@ class NewStrategyCSVDataTests(unittest.TestCase):
         self.ts=StatusCheck(self.driver)
         self.cns=CreateNewStrategyPage(self.driver)
     
-    @pytest.mark.run(order=13)
+    @pytest.mark.run(order=9)
     def test_create_new_strategyfn(self): 
         self.cns.create_new_strategy_home_page()     
         result=self.cns.verifycreatenewstrategy()
