@@ -31,12 +31,14 @@ class HomePage(BasePage):
     _terms_n_conditions_header = "//header[@class='py-2']/h1"
     _login_button="//button[contains(text(),'Sign in')]"
 
+    #to check in
     def navigationToFAQ(self):
         self.nav.navigateToHomePage()
         self.driver.find_element_by_tag_name('body').send_keys(Keys.END) 
         self.waitForVisibilityOfElement(self._FAQ_link, locatorType='xpath')
         self.elementClick(self._FAQ_link, locatorType='xpath')
         self.waitForElement(self._first_question_FAQ, locatorType='xpath')
+        
 
     def verifyNavigationToFAQ(self):
         return self.isElementPresent(self._first_question_FAQ, locatorType='xpath')
