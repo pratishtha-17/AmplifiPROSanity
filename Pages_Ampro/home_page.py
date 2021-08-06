@@ -39,7 +39,7 @@ class HomePage(BasePage):
         self.elementClick(self._FAQ_link, locatorType='xpath')
         self.waitForElement(self._first_question_FAQ, locatorType='xpath')
         
-
+    #to checkin to TFS comment 2
     def verifyNavigationToFAQ(self):
         return self.isElementPresent(self._first_question_FAQ, locatorType='xpath')
 
