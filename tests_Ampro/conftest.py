@@ -17,7 +17,7 @@ def oneTimeSetUp(request, browser):
     driver = wdf.getWebDriverInstance()
     lp=LoginPage(driver)
     # lp.login("pratishtha.bhadula@thesmartcube.com","Login#123") #test credentials
-    lp.login("pratishtha.bhadula@thesmartcube.com","Technology#1706")
+    lp.login("pratishtha.bhadula@thesmartcube.com","Aimforthemoon#22")
     time.sleep(2)
 
     if request.cls is not None:

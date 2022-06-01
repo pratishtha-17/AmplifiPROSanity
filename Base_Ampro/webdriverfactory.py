@@ -10,9 +10,9 @@ class WebDriverFactory():
         #Test URL
         #baseURL="http://tscdelphp03:9090/amplifipro-test-july/login" 
         #UAT URL
-        baseURL="https://amplifipro2.tsclabs.in/" 
+        #baseURL="https://amplifipro2.tsclabs.in/" 
         #PROD url
-        #baseURL = "https://amplifipro.thesmartcube.com/" 
+        baseURL = "https://amplifipro.thesmartcube.com/" 
         if self.browser=="ieexplorer":
             driver=webdriver.Ie()
         elif self.browser=="firefox":
